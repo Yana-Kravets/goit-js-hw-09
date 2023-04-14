@@ -23,6 +23,8 @@ const refs = {
   seconds: document.querySelector('[data-seconds]'),
 }
 
+refs.startBtnDate.disabled = true;
+
 class Timer {
   constructor() {
     this.intervalId = null;
@@ -32,8 +34,8 @@ class Timer {
     start() {
     if (this.isActive) {
       return;
-    }
-    const startTime = Date.now();
+      }
+      
     this.isActive = true;
 
     this.intervalId = setInterval(() => {
@@ -41,6 +43,7 @@ class Timer {
       const deltaTime = selectedTime - currentTime;
       const timeComponents = convertMs(deltaTime);
       this.updateTimer(timeComponents);
+      refs.startBtnDate.disabled = true;
     }, TIMER_DELAY)
   }
   stop() {
@@ -75,7 +78,7 @@ const options = {
       console.log(selectedDates[0]);
       if (selectedDates[0] < Date.now()) {
         Notify.failure('🥺 Ooops... Please, choose a date in the future');
-        refs.startBtnDate.disabled = true;
+        selectedDates[0] = new Date();
       } else {
         Notify.success('🥰 Congratulation! Click on start!');
         refs.startBtnDate.disabled = false;
