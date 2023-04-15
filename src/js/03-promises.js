@@ -13,9 +13,9 @@ function onPromiseCreate(event) {
   let inputAmount = Number(amount.value);
 
   for (let i = 1; i <= inputAmount; i += 1) {
-    inputDelay += inputStep;
+    let currentDelay = inputDelay + (i - 1) * inputStep;
 
-  createPromise(i, inputDelay)
+  createPromise(i, currentDelay)
   .then(({ position, delay }) => {
     Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
   })
