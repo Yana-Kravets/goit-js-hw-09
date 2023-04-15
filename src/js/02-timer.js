@@ -45,7 +45,7 @@ class Timer {
       this.updateTimer(timeComponents);
       refs.startBtnDate.disabled = true;
 
-      if (deltaTime <= 0 || deltaTime <= 1000) {
+      if (deltaTime <= 0) {
         this.stop();
       }
     }, TIMER_DELAY)
@@ -53,7 +53,6 @@ class Timer {
 
   stop() {
     clearInterval(this.intervalId);
-    this.isActive = false;
   }
 
   updateTimer({ days, hours, minutes, seconds }) {
