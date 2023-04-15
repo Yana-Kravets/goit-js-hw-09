@@ -45,18 +45,16 @@ class Timer {
       this.updateTimer(timeComponents);
       refs.startBtnDate.disabled = true;
 
-        if (deltaTime <= 0 || deltaTime <= 1000) {
-          clearInterval(this.intervalId);
+      if (deltaTime <= 0) {
+        this.stop();
       }
-
     }, TIMER_DELAY)
   }
 
-  // stop() {
-  //   clearInterval(this.intervalId);
-  //   this.isActive = false;
-  //   this.intervalId = null;
-  // }
+  stop() {
+    clearInterval(this.intervalId);
+    this.isActive = false;
+  }
 
   updateTimer({ days, hours, minutes, seconds }) {
     refs.days.innerHTML = addLeadingZero(days);
