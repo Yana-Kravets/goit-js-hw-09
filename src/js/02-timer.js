@@ -44,12 +44,19 @@ class Timer {
       const timeComponents = convertMs(deltaTime);
       this.updateTimer(timeComponents);
       refs.startBtnDate.disabled = true;
+
+        if (deltaTime <= 0 || deltaTime <= 1000) {
+          clearInterval(this.intervalId);
+      }
+
     }, TIMER_DELAY)
   }
-  stop() {
-    clearInterval(this.intervalId);
-    this.isActive = false;
-  }
+
+  // stop() {
+  //   clearInterval(this.intervalId);
+  //   this.isActive = false;
+  //   this.intervalId = null;
+  // }
 
   updateTimer({ days, hours, minutes, seconds }) {
     refs.days.innerHTML = addLeadingZero(days);
@@ -59,18 +66,18 @@ class Timer {
  }
 }
 
+const timer = new Timer();
+
 refs.startBtnDate.addEventListener('click', () => {
   timer.start();
 });
-
-const timer = new Timer();
 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
 
 const options = {
-  enableTime: true,  
+  enableTime: true,
     time_24hr: true,
     defaultDate: new Date(),
     minuteIncrement: 1,
@@ -111,3 +118,5 @@ function convertMs(ms) {
 console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
 console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+
+
